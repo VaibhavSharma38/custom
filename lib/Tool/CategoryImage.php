@@ -11,11 +11,11 @@ class Tool_CategoryImage extends \xepan\cms\View_Tool{
 		parent::init();
 
 		$cat_m = $this->add('xepan\commerce\Model_Category');
-		$cat_m->loadBy('slug_url',$_GET['parent_category_code']);	
+		$cat_m->tryLoadBy('slug_url',$_GET['parent_category_code']);	
 		$parent_category_id = $cat_m->id;
 		$cat_m->unload();	
 		$category_code = explode('/', $_GET['category_code']);
-		$cat_m->loadBy('slug_url',$category_code[1]);	
+		$cat_m->tryLoadBy('slug_url',$category_code[1]);	
 		$category_id = $cat_m->id;
 
 		$categoryimage_m = $this->add('xepan\custom\Model_CategoryImage');
