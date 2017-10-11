@@ -11,7 +11,7 @@ class Tool_IdToName extends \xepan\cms\View_Tool{
 
 	function init(){
 		parent::init();
-			
+		return;
 		if($parent_category = $_GET['parent_category_id']){			
 			$parent_category_m = $this->add('xepan\commerce\Model_Category');
 			$parent_category_m->load($parent_category);
