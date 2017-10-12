@@ -21,7 +21,7 @@ class Tool_Wishlist extends \xepan\cms\View_Tool{
 				$contact_m = $this->add('xepan\base\Model_Contact');
 				$contact_m->loadBy('user_id',$this->app->auth->model->id);
 				
-				$wishlist_m = $this->add('xepan\commerce\Model_Wishlist');
+				$wishlist_m = $this->add('xepan\custom\Model_Wishlist');
 				$wishlist_m->addCondition('customer_id',$contact_m->id);
 				$wishlist_m->addCondition('item_id',$_GET['commerce_item_id']);
 				$wishlist_m->tryLoadAny();
