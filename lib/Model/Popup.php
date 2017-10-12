@@ -36,7 +36,7 @@ class Model_Popup extends \xepan\base\Model_Table{
 		if($m['status'] != 'Active')
 			return;
 					
-		$card_m = $this->add('xepan\commerce\Model_Card');
+		$card_m = $this->add('xepan\commerce\Popup');
 		$card_m->addCondition('id','<>',$m->id);
 
 		foreach ($card_m as $card) {
