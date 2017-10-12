@@ -1,6 +1,16 @@
 
-<div id="{$_name}" style="display:none" for-xepan-component="xepan/commerce/Tool_IdToName" class="xepan-tool-options">
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/custom/Tool_Breadcrumb" class="xepan-tool-options">
   <h3>Breadcrumb</h3>
+    <div class="xepan-tool-option">
+    <div class="xepan-tool-option-title">Intermediate Value</div>
+    <div class="xepan-tool-option-value"> 
+      <input id="intermediate_value" data-attr="intermediate_value"/>
+    </div>
+    <div class="xepan-tool-option-title">Intermediate Link</div>
+    <div class="xepan-tool-option-value"> 
+      <input id="intermediate_link" data-attr="intermediate_link"/>
+    </div>
+  </div>
 
    <script>
     $('#{$_name} [data-attr]').on('change',function(){

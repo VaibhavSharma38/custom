@@ -43,11 +43,11 @@ class Initiator extends \Controller_Addon {
    	 	$this->app->exportFrontEndTool('xepan\custom\Tool_LatestFeed','Custom');
     	$this->app->exportFrontEndTool('xepan\custom\Tool_CurrentOpening','Custom');
 		$this->app->exportFrontEndTool('xepan\custom\Tool_CategoryHeading','Custom');
-		$this->app->exportFrontEndTool('xepan\custom\Tool_RecentlyViewedItems','Commerce');
-		$this->app->exportFrontEndTool('xepan\custom\Tool_WishlistDetail','Commerce');
-		$this->app->exportFrontEndTool('xepan\custom\Tool_Wishlist','Commerce');
-		$this->app->exportFrontEndTool('xepan\custom\Tool_Breadcrumb','Commerce');
-		$this->app->exportFrontEndTool('xepan\custom\Tool_LinkRefer','Commerce');	
+		$this->app->exportFrontEndTool('xepan\custom\Tool_RecentlyViewedItems','Custom');
+		$this->app->exportFrontEndTool('xepan\custom\Tool_WishlistDetail','Custom');
+		$this->app->exportFrontEndTool('xepan\custom\Tool_Wishlist','Custom');
+		$this->app->exportFrontEndTool('xepan\custom\Tool_Breadcrumb','Custom');
+		$this->app->exportFrontEndTool('xepan\custom\Tool_LinkRefer','Custom');	
 
 		return $this;
 	}
