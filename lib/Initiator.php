@@ -13,6 +13,8 @@ class Initiator extends \Controller_Addon {
 		->setBaseURL('../vendor/xepan/custom/');
 
 		$m = $this->app->top_menu->addMenu('Custom Application');
+		$m->addItem(['Category/Collection','icon'=>'fa fa-sitemap'],'xepan_custom_category');
+		$m->addItem(['Item','icon'=>'fa fa-cart-plus'],$this->app->url('xepan_custom_item',['status'=>'Published']));
 		$m->addItem(['Category Image','icon'=>'fa fa-picture-o'],'xepan_custom_categoryimage');
 		$m->addItem(['Popup Banner','icon'=>'fa fa-file-image-o'],'xepan_custom_popup');
 		$m->addItem(['Carrer','icon'=>'fa fa-briefcase'],'xepan_custom_carrer');
