@@ -19,6 +19,7 @@ class Initiator extends \Controller_Addon {
 		$m->addItem(['Feed','icon'=>'fa fa-rss'],'xepan_custom_feeds');
 		$m->addItem(['Item Enquiry','icon'=>'fa fa-envelope-o'],'xepan_custom_itemenquiry');
 		$m->addItem(['URL Redirection','icon'=>'fa fa-link'],'xepan_custom_redirection');
+		$m->addItem(['Import/Export','icon'=>'fa fa-cog fa-spin'],'xepan_custom_stockimporter');
 
 		$this->app->addHook('entity_collection',[$this,'exportEntities']);
 		return $this;
@@ -48,6 +49,15 @@ class Initiator extends \Controller_Addon {
 		$this->app->exportFrontEndTool('xepan\custom\Tool_Wishlist','Custom');
 		$this->app->exportFrontEndTool('xepan\custom\Tool_Breadcrumb','Custom');
 		$this->app->exportFrontEndTool('xepan\custom\Tool_LinkRefer','Custom');	
+		$this->app->exportFrontEndTool('xepan\custom\Tool_SubCategory','Custom');
+		$this->app->exportFrontEndTool('xepan\custom\Tool_SubCategoryDetail','Custom');
+		$this->app->exportFrontEndTool('xepan\custom\Tool_ShopCollectionDetail','Custom');
+		$this->app->exportFrontEndTool('xepan\custom\Tool_ShopCollection','Custom');
+		$this->app->exportFrontEndTool('xepan\custom\Tool_Filter','Custom');
+		$this->app->exportFrontEndTool('xepan\custom\Tool_Category','Custom');
+		$this->app->exportFrontEndTool('xepan\custom\Tool_ItemList','Custom');
+		$this->app->exportFrontEndTool('xepan\custom\Tool_ItemImage','Custom');
+		$this->app->exportFrontEndTool('xepan\custom\Tool_Item_Detail','Custom');
 
 		return $this;
 	}
