@@ -24,6 +24,6 @@ class Tool_Category extends \xepan\cms\View_Tool{
 		}else
 			$this->options['custom_template'] = "categorylister";
 
-		$lister = $this->add('xepan\commerce\View_CategoryLister',['options'=>$this->options]);
+		$lister = $this->add('xepan\custom\View_CategoryLister',['options'=>$this->options]);
 	}
 }
