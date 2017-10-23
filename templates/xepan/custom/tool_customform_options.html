@@ -1,0 +1,65 @@
+
+<div id="{$_name}" style="display:none" for-xepan-component="xepan/cms/Tool_CustomForm" class="xepan-tool-options">
+  <h3 data-toggle="collapse" data-target="#collapse-item-images" aria-expanded="false" class="collapsed"><span>Custom Form Option</span></h3>
+  <div id="collapse-item-images" class="xepan-cms-tools-bar-panel row-fluid collapse in">
+    <div class="panel-body">
+      <div id="xepan-cms-groups-panel" class="xepan-cms-groups-panel collapse in"></div>
+      <div class="xepan-cms-group-panel clearfix">
+        <div data-toggle="collapse" data-target="#show-hide-item-image" aria-expanded="false" class="panel panel-heading panel-primary collapsed"><span>Custom Form</span></div>
+      </div>
+      <div id="show-hide-item-image" class="xepan-cms-tools-bar-panel row-fluid collapse">
+        <table class="table table-condensed table-hover">
+          <tr>
+            <div class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Custom Form Name</td>
+              <td class="xepan-tool-option-value">
+                <select id="custom_form_{$id}" data-attr="customformid"></select>
+              </td>
+            </div>
+          </tr>
+          <tr>
+            <div class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Custom Form Template</td>
+              <td class="xepan-tool-option-value"> 
+                <input id="custom_form_layout" data-attr="template"/>
+              </td>
+            </div>
+          </tr>
+          <tr>
+            <div class="xepan-tool-option">
+              <td class="xepan-tool-option-title">Success URL</td>
+              <td class="xepan-tool-option-value"> 
+                <input id="custom-form-sucess-url" data-attr="custom_form_success_url" data-shortname="success_url"/>
+              </td>
+            </div>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script>
+    $('#{$_name} [data-attr]').on('change',function(){
+    	$(current_selected_component).attr($(this).data('attr'),$(this).val());
+    	$(current_selected_component).univ().errorMessage('Save and reload Page to see changes');
+    });
+    
+    $('#{$_name}').on('show',function(event){
+    	$('#{$_name} [data-attr]').each(function(index,value){
+    		$(this).val($(current_selected_component).attr($(this).data('attr')));
+    		//- $(current_selected_component).attr('customformid',$(this).val());
+    	});
+    
+    	$.ajax({
+    			url: 'index.php?page=xepan_cms_admin_getforms',
+    			type: 'GET',
+    			data: { },
+    			success: function(data){
+    
+    				$('\#custom_form_{$id}').html(data);
+    				console.log($(current_selected_component).attr('customformid'));
+    				$('\#custom_form_{$id}').val($(current_selected_component).attr('customformid'));
+    			}
+    	});
+    });
+  </script>
+</div>
