@@ -60,6 +60,11 @@ class Tool_ItemEnquiry extends \xepan\cms\View_Tool{
 				}
 
 				$enquiry_m->save();
+				
+				$item_m = $this->add('xepan\commerce\Model_Item');
+				$item_m->load($_GET['item_id']);
+
+				$this->sendEmail($form, $item_m['sku']);
 
 				$form->js()->univ()->successMessage('Enquiry Send')->execute();
 			}
@@ -69,5 +74,26 @@ class Tool_ItemEnquiry extends \xepan\cms\View_Tool{
 		$button = $this->add('Button')->set('Submit Enquiry')->setHTML('<span style ="font-size:16px;"><i class="glyphicon glyphicon-envelope"></i></span> <br>Submit Enquiry')->addClass('enquiry-button');
 		
 		$button->js('click',$this->js()->univ()->frameURL("Send Enquiry",$this->api->url($vp->getURL(),['item_id'=>$_GET['commerce_item_id']])))->_selector('.enquiry-button');
+	}
+
+	function sendEmail($form, $item_name){
+		$string = "Name"." = ".$form['name']."<br><br>";
+		$string .= "Organization"." = ".$form['organization']."<br><br>";
+		$string .= "Email"." = ".$form['email']."<br><br>";
+		$string .= "Contact"." = ".$form['contact_no']."<br><br>";
+		$string .= "Address"." = ".$form['address']."<br><br>";
+		$string .= "City"." = ".$form['city']."<br><br>";
+		$string .= "State"." = ".$form['state']."<br><br>";
+		$string .= "Country"." = ".$form['country']."<br><br>";
+		$string .= "Requirements"." = ".$form['requirements']."<br><br>";
+		$string .= "Item Name"." = ".$item_name."<br><br>";
+
+		$communication = $this->add('xepan\communication\Model_Communication_Email_Sent');
+		$email_settings = $this->add('xepan\communication\Model_Communication_EmailSetting')->tryLoadAny();
+		$communication->setfrom($email_settings['from_email'],$email_settings['from_name']);
+		$communication->addTo('info@saraswatiglobal.com');
+		$communication->setSubject('Enquiry for item on saraswati global website');
+		$communication->setBody($string);
+		$communication->send($email_settings);
 	}
 }
