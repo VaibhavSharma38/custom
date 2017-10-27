@@ -1,0 +1,108 @@
+<style>
+.customorderform input {
+    border-left: 4px solid #3F7ECB !important;
+    font-size: 0.8125em;
+    color: #999;
+    padding: 8px;
+    outline: none;
+    margin: 10px 0;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;
+    border: 1px solid #999595;
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: rgb(153, 149, 149);
+}
+.customorderform textarea {
+  	padding: 10px 15px;
+    width: 60%;
+    color: #000;
+    font-size: 0.8125em;
+    border: 1px solid #999595 !important;
+    background: #fff;
+    outline: none;
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+	overflow: auto;
+    vertical-align: top;
+  	border-left: 4px solid #57bdc9 !important;
+	font-size: 0.8125em;
+	color: #999;
+	padding: 8px;
+	outline: none;
+	margin: 10px 0;
+	width: 100%;
+	font-family: 'Open Sans', sans-serif;
+	border: 1px; 
+}
+
+ .atk-button {
+    background: #555;
+    color: #FFF;
+    font-size: 0.8em;
+    padding: 8px 20px;
+    border-radius: 5px;
+    border-bottom: 4px solid #57bdc9;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    display: inline-block;
+    font-family: 'Open Sans', sans-serif;
+    cursor: pointer;
+    outline: none;
+    text-transform: uppercase;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    float: left;
+    width:100%;
+}
+
+</style>
+<div class="customorderform">
+	<div class="row">
+		<div class ="col-sm-3">
+			<div>Collection</div>
+			{$collection}
+		</div>
+		<div class ="col-sm-3">
+			<div>Design</div>
+			{$design}
+		</div>
+		<div class ="col-sm-3">
+			<div>Color</div>
+			{$color}
+		</div>
+		<div class ="col-sm-3">
+			<div>Size</div>
+			{$size}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class ="col-sm-6">
+			<div>Quantity</div>
+			{$qty}
+		</div>
+		<div class ="col-sm-6">
+			<div>Price</div>
+			{$price}
+		</div>
+		
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			{$narration}
+		</div>
+	</div>
+
+	<div class="row" style="margin-top:10px;">
+		<div class="col-sm-12">
+			{$FormButton}
+		</div>
+	</div>
+</div>
+
+{$Content}

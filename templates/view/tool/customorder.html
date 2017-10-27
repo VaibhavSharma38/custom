@@ -1,0 +1,84 @@
+<style style="">
+.trh{
+  background-color: #fff !important;
+  border-color: #fff !important;
+}
+td{
+  text-align: center;
+}
+
+.btn-primary{
+  background-color : #333D51 !important;
+  border-color: #333D51 !important; 
+}
+
+</style>
+<div id="{$_name}" class="xepan-grid main-box clearfix atk-table atk-table-zebra atk-table-bordered {$class}">{Pannel}
+  <header class="main-box-header clearfix atk-actions  {$class} ">
+    <div style="100%" class="filter-block">
+      <div class="pull-right">{$grid_buttons} </div>
+      <div class="form-group pull-right">{$quick_search}</div>
+    </div>
+  </header>{/Pannel}
+  <div class="main-box-body clearfix table-responsive">
+    <table style="width:100%" class="opening-table mce-item-table table table-hover">{header}
+      <thead class="xepan-hover-hand trh">{cols}{col}
+        <td>Order No.</td>
+        <td>Date</td>
+        <td>Customer</td>
+        <td>A/C</td>
+        <td>Delivery</td>
+        <td>Ship To</td>
+        <td>Ship Via</td>
+        <td>Residentail</td>
+        <td>Lift Gate</td>
+        <td>Signature</td>
+        <td>Ship Complete</td>
+        <td>White Glove</td>
+        <td>Inst.</td>
+        <th> </th>
+        <th> </th>
+        {/}{/}
+      </thead>{/}
+      {$subheader}
+      <tbody>{rows}{row}
+        <tr data-id="{$id}" class="{$odd_even}" style="font-size: 15px !important;">{cols}
+          <td>{$order_no}</td>
+          <td>{$created_at}</td>
+          <td>{$customer_name}</td>
+          <td>{$account_no}</td>
+          <td>{$deliver_date}</td>
+          <td>{$ship_to}</td>
+          <td>{$ship_method}</td>
+          <td>{$residentail}</td>
+          <td>{$lift_gate}</td>
+          <td>{$signature_required}</td>
+          <td>{$ship_complete}</td>
+          <td>{$white_glove}</td>
+          <td>{$instructions}</td>
+          <td>
+            {$OrderItems}
+          </td>  
+          <td style="width: 12%;">
+            {$edit}
+            {$delete}
+          </td>
+          {/}
+        </tr>{/}{/}
+        {not_found}
+        <div class="row">
+          <div role="alert" class="col-md-12 text-center alert alert-warning"><span class="icon-attention fa fa-exclamation-triangle xepan-commerce-myaccount-action"> &nbsp;{$not_found_message}</span></div>
+        </div>{/}
+      </tbody>{totals}
+      <tfoot>
+        <tr class="totals">
+          {cols}{col}
+          <td {$tdparam}>
+          {$content}
+          </td>
+          {/}{/}
+        </tr>
+      </tfoot>{/}
+    </table>{$Paginator}
+  </div>
+</div>

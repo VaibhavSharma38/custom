@@ -1,0 +1,67 @@
+<style style="">
+.trh{
+  background-color: #fff !important;
+  border-color: #fff !important;
+}
+td{
+  text-align: center;
+}
+
+.btn-primary{
+  background-color : #333D51 !important;
+  border-color: #333D51 !important; 
+}
+
+</style>
+<div id="{$_name}" class="xepan-grid main-box clearfix atk-table atk-table-zebra atk-table-bordered {$class}">{Pannel}
+  <header class="main-box-header clearfix atk-actions  {$class} ">
+    <div style="100%" class="filter-block">
+      <div class="pull-right">{$grid_buttons} </div>
+      <div class="form-group pull-right">{$quick_search}</div>
+    </div>
+  </header>{/Pannel}
+  <div class="main-box-body clearfix table-responsive">
+    <table style="width:100%" class="opening-table mce-item-table table table-hover">{header}
+      <thead class="xepan-hover-hand trh">{cols}{col}
+        <td>Collection</td>
+        <td>Design</td>
+        <td>Color</td>
+        <td>Size</td>
+        <td>Qty</td>
+        <td>Price</td>
+        <td>Narration</td>
+        {/}{/}
+      </thead>{/}
+      {$subheader}
+      <tbody>{rows}{row}
+        <tr data-id="{$id}" class="{$odd_even}" style="font-size: 15px !important;">{cols}
+          <td>{$collection}</td>
+          <td>{$design}</td>
+          <td>{$color}</td>
+          <td>{$size}</td>
+          <td>{$qty}</td>
+          <td>{$price}</td>
+          <td>{$narration}</td>
+          <td style="width: 15%;">
+            {$edit}
+            {$delete}
+          </td>
+          {/}
+        </tr>{/}{/}
+        {not_found}
+        <div class="row">
+          <div role="alert" class="col-md-12 text-center alert alert-warning"><span class="icon-attention fa fa-exclamation-triangle xepan-commerce-myaccount-action"> &nbsp;{$not_found_message}</span></div>
+        </div>{/}
+      </tbody>{totals}
+      <tfoot>
+        <tr class="totals">
+          {cols}{col}
+          <td {$tdparam}>
+          {$content}
+          </td>
+          {/}{/}
+        </tr>
+      </tfoot>{/}
+    </table>{$Paginator}
+  </div>
+</div>
