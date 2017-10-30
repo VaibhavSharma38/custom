@@ -253,6 +253,7 @@ class Tool_Filter extends \xepan\cms\View_Tool{
 			if($this->options['filter_type'] == 'Product'){
 				$url = 'product/'.$_GET['category_code'];
 				$this->app->stickyForget('category_code');
+				$this->app->stickyForget('parent_category_code');
 				$form->app->redirect($this->app->url($url));
 			}			
 			elseif($this->options['filter_type'] == 'Shop'){
