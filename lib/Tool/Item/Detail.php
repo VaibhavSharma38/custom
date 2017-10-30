@@ -32,7 +32,7 @@ class Tool_Item_Detail extends \xepan\cms\View_Tool{
 		$item_id = $this->api->stickyGET('commerce_item_id');
 		if(!$item_id){
 			$i = $this->add('xepan\commerce\Model_item');
-			$i->loadBy('slug_url',$_GET['item_code']);
+			$i->tryLoadBy('slug_url',$_GET['item_code']);
 			$item_id = $i->id;
 			
 		}

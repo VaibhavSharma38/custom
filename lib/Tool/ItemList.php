@@ -39,13 +39,17 @@ class Tool_ItemList extends \xepan\cms\View_Tool{
 					'show_microdata'=>true,
 					'amount_group_in_multistepform'=>null,
 					'show_out_of_stock'=>true,
-					'hide_items'=>''
+					'hide_items'=>'',
+					'sef'=>''
 				];
 
 	public $complete_lister=null;
 
 	function init(){
 		parent::init();		
+		
+		$this->app->stickyForget('parent_category_code');
+		$this->app->stickyForget('category_code');
 		
 		//Validate Required Options Value
 		$message = $this->validateRequiredOptions();
@@ -412,16 +416,17 @@ class Tool_ItemList extends \xepan\cms\View_Tool{
 
 	function addToolCondition_row_item_detail_page_url($value,$l){
 		$url = $this->api->url();
-		$detail_page_url = $this->api->url($this->options['item_detail_page_url'],['commerce_item_id'=>$l->model->id]);
+		// $detail_page_url = $this->api->url($this->options['item_detail_page_url'],['commerce_item_id'=>$l->model->id]);		
+		// $detail_page_url = $this->api->url("product/".$_GET['parent_category_code'].'/'.$_GET[' category_code'].'/'.$l->model['slug_url']);
 
 		if($this->options['name_redirect_to_detail'] == "true"){
-			$l->current_row_html['item_detail_page_url_via_name'] = $detail_page_url;
+			$l->current_row_html['item_detail_page_url_via_name'] = $this->api->url($this->options['sef'].'/'.$_GET['parent_category_code'].'/'.$_GET[' category_code'].'/'.$l->model['slug_url']);
 		}else{			
 			$l->current_row_html['item_detail_page_url_via_name'] = $url;
 		}
 
 		if($this->options['image_redirect_to_detail'] == "true")
-			$l->current_row_html['item_detail_page_url_via_image'] = $detail_page_url;
+			$l->current_row_html['item_detail_page_url_via_image'] = $this->api->url($this->options['sef']."/".$_GET['parent_category_code'].'/'.$_GET[' category_code'].'/'.$l->model['slug_url']);
 		else
 			$l->current_row_html['item_detail_page_url_via_image'] = $url;
 			

@@ -16,7 +16,7 @@ class Tool_ItemImage extends \xepan\cms\View_Tool{
 		
 		if(!$item_id){
 			$item_m = $this->add('xepan\commerce\Model_Item');
-			$item_m->loadBy('slug_url',$_GET['item_code']);
+			$item_m->tryLoadBy('slug_url',$_GET['item_code']);
 			$item_id = $item_m->id;
 		}	
 
