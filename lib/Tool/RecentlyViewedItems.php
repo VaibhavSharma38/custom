@@ -12,11 +12,11 @@ class Tool_RecentlyViewedItems extends \xepan\cms\View_Tool{
 	function init(){
 		parent::init();
 
-		$item_id = $_GET['commerce_item_id'];
-		
+		$item_id = $_GET['item_code'];		
 		$item_cookie = $_COOKIE['items'];		
 		$item_cookie = stripslashes($item_cookie);
 		$item_id_array = json_decode($item_cookie, true);
+		
 		
 		$this->options['custom_template'] = "recentlyviewed";
 
@@ -41,7 +41,7 @@ class Tool_RecentlyViewedItems extends \xepan\cms\View_Tool{
 			return;
 		
 		$item_m = $this->add('xepan\commerce\Model_Item');
-		$item_m->addCondition('id',$arr);
+		$item_m->addCondition('slug_url',$arr);
 
 		if($this->options['hide_product'] == 'true'){
 			$item_m->addCondition('hide_in_product',1);
@@ -52,10 +52,9 @@ class Tool_RecentlyViewedItems extends \xepan\cms\View_Tool{
 
 		$grid = $this->add('xepan\base\Grid',null,null,['view/tool/'.$this->options['custom_template']]);
 		$grid->setModel($item_m);
-	
+		
 		$grid->addHook('formatRow',function($g){
-	 		$this->forget('commerce_item_id');
-			$detail_page_url = $this->api->url($this->options['page_name'],['commerce_item_id'=>$g->model->id]);						
+			$detail_page_url = $this->api->url($this->options['page_name'].'/'.$_GET['parent_category_code'].'/'.$_GET[' category_code'].'/'.$g->model['slug_url']);						
 			$g->current_row_html['page_link'] = $detail_page_url;
 		});
 
