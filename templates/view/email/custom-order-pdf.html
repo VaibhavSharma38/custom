@@ -18,13 +18,39 @@
 <tr>
 <td style="width: 100%; max-width: 25%;">
 <p>&nbsp;</p>
-<p><strong>Order No :</strong>&nbsp;{$order_no}</p>
-<p><strong>Date :</strong>&nbsp;{$created_at}</p>
-<p><strong>Customer Name :</strong> {$customer_name}</p>
-<p><strong>Ship To :</strong> {$ship_to}&nbsp;</p>
-<p><strong>Ship Method :</strong> {$ship_method}&nbsp;</p>
-<p><strong>Deliver Date :</strong> {$deliver_date}&nbsp;&nbsp;</p>
-<p><strong>Instructions :</strong> {$instructions}</p>
+<table style="height: auto;" width="100%">
+<tbody>
+<tr>
+<td style="width: 30%;"><strong>Order Number</strong></td>
+<td style="width: 70%;">{$order_no}<br /><br /></td>
+</tr>
+<tr>
+<td style="width: 30%;"><strong>Date</strong></td>
+<td style="width: 70%;">{$created_at}<br /><br /></td>
+</tr>
+<tr>
+<td style="width: 30%;"><strong>Customer Name</strong></td>
+<td style="width: 70%;">{$customer_name}<br /><br /></td>
+</tr>
+<tr>
+<td style="width: 30%;"><strong>Shipping Address</strong></td>
+<td style="width: 70%;">{$ship_to}<br /><br /></td>
+</tr>
+<tr>
+<td style="width: 30%;"><strong>Shipping</strong> <strong>Method</strong></td>
+<td style="width: 70%;">{$ship_method}<br /><br /></td>
+</tr>
+<tr>
+<td style="width: 30%;"><strong>Delivery</strong> <strong>Date</strong></td>
+<td style="width: 70%;">{$deliver_date}<br /><br /></td>
+</tr>
+<tr>
+<td style="width: 30%;"><strong>Instructions</strong></td>
+<td style="width: 70%;">{$instructions}<br /><br /></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
 </td>
 </tr>
 <tr>
@@ -32,7 +58,7 @@
 </tr>
 </tbody>
 </table>
-<table style="border:0 solid #ffffff; width: 100%; font-family: times new roman,times,serif; padding: 5px;">
+<table style="border: 0 solid #ffffff; width: 100%; font-family: times new roman,times,serif; padding: 5px;">
 <thead>
 <tr style="border: 0.9px solid #6e6e6e;">
 <td style="width: 15%; font-size: 8px; border: 1px solid #6e6e6e; text-align: left;"><span style="font-size: 12px;"><strong>Collection</strong></span></td>
