@@ -25,7 +25,7 @@ class Tool_CustomOrder extends \xepan\cms\View_Tool{
     if($order_c->isEditing())
       $order_c->form->setLayout('view\tool\form\customorder');
     
-    $order_c->setModel($order_m,['customer_name','account_no','order_no','deliver_date','ship_to','ship_method','residentail','lift_gate','signature_required','ship_complete','white_glove','instructions'],['created_at','customer_name','account_no','order_no','deliver_date','ship_to','ship_method','residentail','lift_gate','signature_required','ship_complete','white_glove','instructions']);
+    $order_c->setModel($order_m,['customer_name','order_no','deliver_date','ship_to','ship_method','instructions'],['created_at','customer_name','order_no','deliver_date','ship_to','ship_method','instructions']);
 
     $order_c->grid->add('VirtualPage')->addColumn('OrderItems')
             ->set(function($page){
@@ -82,7 +82,7 @@ class Tool_CustomOrder extends \xepan\cms\View_Tool{
     $body_v = $this->add('View',null,null,['view\email\custom-order']);
     $body_v->setModel($custom_order);
 
-    $body_v->template->trySet($custom_order,['customer_name','account_no','order_no','deliver_date','ship_to','ship_method','residentail','lift_gate','signature_required','ship_complete','white_glove','instructions']);
+    $body_v->template->trySet($custom_order,['customer_name','order_no','deliver_date','ship_to','ship_method','instructions']);
 
     $item_lister = $body_v->add('Lister',null,'item_lister',['view\email\custom-order-info']);
     $item_lister->setModel($custom_order_info,['collection','design','color','size','qty','price','narration']);  
@@ -96,7 +96,7 @@ class Tool_CustomOrder extends \xepan\cms\View_Tool{
     
     $pdf_v = $this->add('View',null,null,['view\email\custom-order-pdf']);
     $pdf_v->setModel($custom_order);
-    $pdf_v->template->trySet($custom_order,['customer_name','account_no','order_no','deliver_date','ship_to','ship_method','residentail','lift_gate','signature_required','ship_complete','white_glove','instructions']);
+    $pdf_v->template->trySet($custom_order,['customer_name','order_no','deliver_date','ship_to','ship_method','instructions']);
     $item_lister_pdf = $pdf_v->add('Lister',null,'item_lister',['view\email\custom-order-info-pdf']);
     $item_lister_pdf->setModel($custom_order_info,['collection','design','color','size','qty','price','narration']);  
 
