@@ -50,10 +50,17 @@ class Tool_Breadcrumb extends \xepan\cms\View_Tool{
 		$lister = $this->add('Lister',null,null,['view\tool\breadcrumb']);
 		$lister->setSource($breadcrumb_array);
 		
-		$lister->addHook('formatRow',function($l)use($url_array){
+		$size_of_breadcrumb = count($breadcrumb_array);
+		$lister->addHook('formatRow',function($l)use($url_array, $size_of_breadcrumb){			
 			$l->current_row_html['name'] = $l->model['name'];
 			$l->current_row_html['url'] = 'http://'.$_SERVER['SERVER_NAME'].'/'.$url_array[$this->count];			
+			
 			$this->count+=1;
+			
+			if($this->count == $size_of_breadcrumb )
+				$l->current_row_html['slash'] = '';			
+			else
+				$l->current_row_html['slash'] = '/';			
 		});
 	}
 }
