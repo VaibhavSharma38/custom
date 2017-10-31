@@ -18,7 +18,7 @@ class Model_CustomOrder extends \xepan\base\Model_Table{
 		$this->addField('instructions')->type('text');
 
 		$this->addHook('beforeSave',[$this,'saveCustomer']);
-		$this->addHook('beforeDelete',[$this,'deleteCustomOrderInfo']);
+		$this->addHook('beforeDelete',$this);
 	}
 
 	function saveCustomer($m){
@@ -26,12 +26,12 @@ class Model_CustomOrder extends \xepan\base\Model_Table{
 	}
 
 
-	function deleteCustomOrderInfo($m){
-		// $custom_order_info_m = $this->add('xepan\commerce\Model_CustomOrderInfo');
-		// $custom_order_info_m->addCondition('custom_order_id',$m->id);
+	function beforeDelete($m){
+		$custom_order_info_m = $this->add('xepan\custom\Model_CustomOrderInfo');
+		$custom_order_info_m->addCondition('custom_order_id',$m->id);
 
-		// foreach ($custom_order_info_m as $co) {
-		// 	$co->delete();	
-		// }
+		foreach ($custom_order_info_m as $co) {
+			$co->delete();	
+		}
 	}
 }
