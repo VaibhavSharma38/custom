@@ -17,12 +17,39 @@ class Model_CustomOrder extends \xepan\base\Model_Table{
 		$this->addField('ship_method');
 		$this->addField('instructions')->type('text');
 
-		$this->addHook('beforeSave',[$this,'saveCustomer']);
+		$this->addHook('beforeSave',[$this,'fieldValidations']);
+		$this->addHook('beforeSave',[$this,'uniqueOrderNo']);
 		$this->addHook('beforeDelete',$this);
+
 	}
 
-	function saveCustomer($m){
+	function uniqueOrderNo($m){
+		$com = $this->add('xepan\custom\Model_CustomOrder');
+		$com->tryLoadBy('order_no',$m['order_no']);
 
+		if($com->loaded())
+			throw $this->exception('Order number already exist','ValidityCheck')->setField('order_no');
+			
+	}
+
+	function fieldValidations($m){
+		if($this['customer_name'] == '')
+			throw $this->exception('Required(*)','ValidityCheck')->setField('customer_name');
+
+		if($this['order_no'] == '' || !is_numeric($this['order_no']))
+			throw $this->exception('Required(*), number','ValidityCheck')->setField('order_no');
+
+		if($this['deliver_date'] == '')
+			throw $this->exception('Required(*)','ValidityCheck')->setField('deliver_date');
+
+		if($this['ship_to'] == '')
+			throw $this->exception('Required(*)','ValidityCheck')->setField('ship_to');
+
+		if($this['ship_method'] == '')
+			throw $this->exception('Required(*)','ValidityCheck')->setField('ship_method');
+
+		if($this['instructions'] == '')
+			throw $this->exception('Required(*)','ValidityCheck')->setField('instructions');
 	}
 
 
