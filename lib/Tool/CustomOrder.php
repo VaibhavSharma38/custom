@@ -16,6 +16,17 @@ class Tool_CustomOrder extends \xepan\cms\View_Tool{
         return;            
     }
 
+    $customer_auth_m = $this->add('xepan\custom\Model_CustomerAuth');
+   
+    $customer_auth_m->addCondition('customer_id',$customer->id);
+    $customer_auth_m->addCondition('custom_order',true);
+    $customer_auth_m->tryLoadAny();
+
+    if(!$customer_auth_m->loaded()){
+      $this->add('View_Info')->set('Contact Us At info@saraswatiglobal To Place Order')->addClass('jumbotron well text-center row alert alert-info h3');
+      return; 
+    }
+
     $this->customer_id = $customer->id;
 
 		// ORDER

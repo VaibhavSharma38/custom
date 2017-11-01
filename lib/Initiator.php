@@ -22,6 +22,7 @@ class Initiator extends \Controller_Addon {
 		$m->addItem(['Item Enquiry','icon'=>'fa fa-envelope-o'],'xepan_custom_itemenquiry');
 		$m->addItem(['URL Redirection','icon'=>'fa fa-link'],'xepan_custom_redirection');
 		$m->addItem(['Import/Export','icon'=>'fa fa-cog fa-spin'],'xepan_custom_stockimporter');
+		$m->addItem(['Configuration','icon'=>'fa fa-cog fa-spin'],'xepan_custom_configuration');
 
 		$this->app->addHook('entity_collection',[$this,'exportEntities']);
 		return $this;
