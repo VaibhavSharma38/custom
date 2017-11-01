@@ -53,14 +53,16 @@ class Tool_CustomOrder extends \xepan\cms\View_Tool{
             });
 
     $order_c->grid->add('VirtualPage')->addColumn('Email')
-        ->set(function($page){
+        ->set(function($page)use($customer){
+          $email_array = $customer->getEmails();
+          $email_array [] = 'info@saraswatiglobal.com';
           $id = $_GET[$page->short_name.'_id'];
           $form = $page->add('Form');
-          $form->addField('emails')->setFieldHint('Comma seperated email-id`s');
-          $form->addSubmit('SEND');
+          $form->add('View')->setHTML('Mail will be sent to <b> '.implode(',',$email_array).' </b>')->setStyle('margin-bottom:10px; font-size:16px;');
+          $form->addSubmit('SEND EMAIL');
 
           if($form->isSubmitted()){
-            $this->sendEmail($id, $form['emails']);
+            $this->sendEmail($id, implode(',',$email_array));
             $js = [
               $page->js()->univ()->successMessage('Email Sent')
             ];
