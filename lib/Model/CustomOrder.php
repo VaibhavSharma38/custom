@@ -47,9 +47,6 @@ class Model_CustomOrder extends \xepan\base\Model_Table{
 
 		if($this['ship_method'] == '')
 			throw $this->exception('Required(*)','ValidityCheck')->setField('ship_method');
-
-		if($this['instructions'] == '')
-			throw $this->exception('Required(*)','ValidityCheck')->setField('instructions');
 	}
 
 
