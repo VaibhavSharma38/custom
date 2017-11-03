@@ -37,6 +37,9 @@ class Initiator extends \Controller_Addon {
 		if($redirection->loaded())
 			$this->app->redirect($this->app->url($redirection['target']));
 
+		if($_GET['commerce_item_id'])
+			$this->app->redirect($this->app->url('404-not-found'));
+
 		$this->routePages('xepan_custom');
 		$this->addLocation(array('template'=>'templates','js'=>'templates/js','css'=>'templates/css'))
 		->setBaseURL('./vendor/xepan/custom/');
