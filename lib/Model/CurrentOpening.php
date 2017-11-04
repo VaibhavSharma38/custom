@@ -4,7 +4,7 @@ namespace xepan\custom;
 
 class Model_CurrentOpening extends \xepan\base\Model_Table{
 	public $table = "current_opening";
-	// public $acl = false;
+	public $acl = true;
 
 	public $status=[
 		'Active',

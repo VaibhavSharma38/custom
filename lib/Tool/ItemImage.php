@@ -15,7 +15,7 @@ class Tool_ItemImage extends \xepan\cms\View_Tool{
 		$item_id = $this->app->stickyGET('commerce_item_id');
 		
 		if(!$item_id){
-			$item_m = $this->add('xepan\commerce\Model_Item');
+			$item_m = $this->add('xepan\custom\Model_Item');
 			$item_m->tryLoadBy('slug_url',$_GET['item_code']);
 			$item_id = $item_m->id;
 		}	
@@ -24,7 +24,7 @@ class Tool_ItemImage extends \xepan\cms\View_Tool{
 		$this->addClass('xepan-commerce-item-image');
 		$this->js('reload')->reload();
 
-		$item = $this->add('xepan\commerce\Model_Item')->tryLoad($item_id?:-1);
+		$item = $this->add('xepan\custom\Model_Item')->tryLoad($item_id?:-1);
 		if(!$item->loaded()){
 			$this->add('View')->set('No Record Found');
 			return;
@@ -63,7 +63,7 @@ class Tool_ItemImage extends \xepan\cms\View_Tool{
 
 		}
 
-		$template = 'view/tool/itemimage';
+		$template = 'view/tool/item-image';
 
 		if($this->options['custom_template']){
 			$path = getcwd()."/websites/".$this->app->current_website_name."/www/view/tool/".$this->options['custom_template'].".html";

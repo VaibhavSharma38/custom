@@ -16,7 +16,7 @@ class View_ShopCollectionLister extends \CompleteLister{
 	function init(){
 		parent::init();
 		
-		$model = $this->add('xepan\commerce\Model_Category');
+		$model = $this->add('xepan\custom\Model_Category');
 		$model->addCondition('name',['Shop By Collection','Exclusive','Clearance']);
 		$model->setOrder('display_sequence','asc');
 		$this->setModel($model);

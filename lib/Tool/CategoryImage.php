@@ -10,7 +10,7 @@ class Tool_CategoryImage extends \xepan\cms\View_Tool{
 	function init(){
 		parent::init();
 
-		$cat_m = $this->add('xepan\commerce\Model_Category');
+		$cat_m = $this->add('xepan\custom\Model_Category');
 		$cat_m->tryLoadBy('slug_url',$_GET['parent_category_code']);	
 		$parent_category_id = $cat_m->id;
 		$cat_m->unload();	

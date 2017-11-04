@@ -19,14 +19,14 @@ class View_SubCategoryDetailLister extends \CompleteLister{
 		$xsnb_category_id = $_GET['xsnb_category_id'];
 		$category_code = $_GET['category_code'];
 
-		$meta_cat_m = $this->add('xepan\commerce\Model_Category');
+		$meta_cat_m = $this->add('xepan\custom\Model_Category');
 		$meta_cat_m->tryLoadBy('slug_url',$category_code);
   		
   		$this->app->template->trySet('title',$meta_cat_m['meta_title']);
  		$this->app->template->trySet('meta_description',$meta_cat_m['meta_description']);
 		$this->app->template->trySet('meta_keywords',$meta_cat_m['meta_keywords']);
 
-		$model = $this->add('xepan\commerce\Model_Category');
+		$model = $this->add('xepan\custom\Model_Category');
 		$model->addCondition('parent_category','<>',null);
 		$model->addCondition('parent_category','<>',0);
 		$model->addCondition('is_for_product',true);
@@ -51,12 +51,12 @@ class View_SubCategoryDetailLister extends \CompleteLister{
 		}
 
 		if($xsnb_category_id){
-			$cat_m = $this->add('xepan\commerce\Model_Category');
+			$cat_m = $this->add('xepan\custom\Model_Category');
 			$cat_m->load($xsnb_category_id);
 
 			if(!$cat_m['parent_category']){				
 				
-				$m = $this->add('xepan\commerce\Model_CategoryParentAssociation');
+				$m = $this->add('xepan\custom\Model_CategoryParentAssociation');
 				$m->addCondition('parent_category_id',$xsnb_category_id);
 						
 				$temp = [];
@@ -72,12 +72,12 @@ class View_SubCategoryDetailLister extends \CompleteLister{
 		}
 
 		if($category_code){
-			$cat_m = $this->add('xepan\commerce\Model_Category');
+			$cat_m = $this->add('xepan\custom\Model_Category');
 			$cat_m->tryLoadBy('slug_url',$category_code);
 
 			if(!$cat_m['parent_category']){				
 				
-				$m = $this->add('xepan\commerce\Model_CategoryParentAssociation');
+				$m = $this->add('xepan\custom\Model_CategoryParentAssociation');
 				$m->addCondition('parent_category_id',$cat_m->id);
 						
 				$temp = [];

@@ -19,12 +19,12 @@ class View_SubCategoryLister extends \CompleteLister{
 		$category_code = $this->app->stickyGET('category_code');
 
 		if($category_code){
-			$cat = $this->add('xepan\commerce\Model_Category');
+			$cat = $this->add('xepan\custom\Model_Category');
 			$cat->tryLoadBy('slug_url',$category_code);
 			$c = $cat->id;
 		}
 
-		$model = $this->add('xepan\commerce\Model_Category');
+		$model = $this->add('xepan\custom\Model_Category');
 		$model->addCondition('parent_category','<>',null);
 		$model->addCondition('parent_category','<>',0);
 
@@ -50,10 +50,10 @@ class View_SubCategoryLister extends \CompleteLister{
 		$model->addCondition('has_item','>',0);
 		
 		if($xsnb_category_id){
-			$cat_m = $this->add('xepan\commerce\Model_Category');
+			$cat_m = $this->add('xepan\custom\Model_Category');
 			$cat_m->load($xsnb_category_id);
 			
-			$m = $this->add('xepan\commerce\Model_CategoryParentAssociation');
+			$m = $this->add('xepan\custom\Model_CategoryParentAssociation');
 			$m->addCondition('parent_category_id',$xsnb_category_id);
 						
 			$temp = [];
@@ -68,10 +68,10 @@ class View_SubCategoryLister extends \CompleteLister{
 		}
 
 		if($category_code){
-			$cat_m = $this->add('xepan\commerce\Model_Category');
+			$cat_m = $this->add('xepan\custom\Model_Category');
 			$cat_m->tryLoadBy('slug_url',$category_code);
 			
-			$m = $this->add('xepan\commerce\Model_CategoryParentAssociation');
+			$m = $this->add('xepan\custom\Model_CategoryParentAssociation');
 			$m->addCondition('parent_category_id',$cat_m->id);
 						
 			$temp = [];

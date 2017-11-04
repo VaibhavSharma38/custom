@@ -26,7 +26,7 @@ class page_import extends \xepan\base\Page{
 	        
 			fputcsv($file, array('sku', 'size', 'stock','category'));
 	        
-	        $item_m = $this->add('xepan\commerce\Model_Item');
+	        $item_m = $this->add('xepan\custom\Model_Item');
 
 	        $data = [];
 	        foreach ($item_m as $item) {
@@ -43,7 +43,7 @@ class page_import extends \xepan\base\Page{
 				$model_cf_value['name'];
 
 				foreach ($model_cf_value as $cf_val) {
-					$stock_m = $this->add('xepan\commerce\Model_ItemStock');
+					$stock_m = $this->add('xepan\custom\Model_ItemStock');
 					$stock_m->addCondition('item_id',$item->id);
 					$stock_m->addCondition('size',$cf_val['name']);
 					$stock_m->tryLoadAny();
@@ -54,7 +54,7 @@ class page_import extends \xepan\base\Page{
 					if($stock_m->loaded()){
 						$current_stock = $stock_m['current_stock'];
 						
-						$category_m = $this->add('xepan\commerce\Model_Category');
+						$category_m = $this->add('xepan\custom\Model_Category');
 						$category_m->addCondition('id',$stock_m['category']);						
 						$category_m->tryLoadAny();
 						

@@ -40,7 +40,7 @@ class Tool_RecentlyViewedItems extends \xepan\cms\View_Tool{
 		if(!is_array($arr) || empty($arr))
 			return;
 		
-		$item_m = $this->add('xepan\commerce\Model_Item');
+		$item_m = $this->add('xepan\custom\Model_Item');
 		$item_m->addCondition('slug_url',$arr);
 
 		if($this->options['hide_product'] == 'true'){

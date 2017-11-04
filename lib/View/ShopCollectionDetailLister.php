@@ -20,20 +20,20 @@ class  View_ShopCollectionDetailLister extends \CompleteLister{
 		$xsnb_category_id = $this->app->stickyGET('xsnb_category_id');
 		$category_code = $this->app->stickyGET('category_code');
 
-		$meta_cat_m = $this->add('xepan\commerce\Model_Category');
+		$meta_cat_m = $this->add('xepan\custom\Model_Category');
 		$meta_cat_m->tryLoadBy('slug_url',$category_code);
   		
   		$this->app->template->trySet('title',$meta_cat_m['meta_title']);
  		$this->app->template->trySet('meta_description',$meta_cat_m['meta_description']);
 		$this->app->template->trySet('meta_keywords',$meta_cat_m['meta_keywords']);
 		
-		$cat = $this->add('xepan\commerce\Model_Category');
+		$cat = $this->add('xepan\custom\Model_Category');
 		if($category_code){
 			$cat->tryLoadBy('slug_url',$category_code);
 			$c = $cat->id;
 		}
 
-		$model = $this->add('xepan\commerce\Model_Category');
+		$model = $this->add('xepan\custom\Model_Category');
 		$model->addExpression('has_item')->set(function($m,$q) use($xsnb_category_id,$category_code,$c){
 			$asso_m = $this->add('xepan\commerce\Model_CategoryItemAssociation');
 			$asso_m->addCondition('category_id',$m->getElement('id'));
@@ -56,10 +56,10 @@ class  View_ShopCollectionDetailLister extends \CompleteLister{
 		$model->addCondition('has_item','>',0);
 
 		if($xsnb_category_id){
-			$cat_m = $this->add('xepan\commerce\Model_Category');
+			$cat_m = $this->add('xepan\custom\Model_Category');
 			$cat_m->load($xsnb_category_id);
 
-			$m = $this->add('xepan\commerce\Model_CategoryParentAssociation');
+			$m = $this->add('xepan\custom\Model_CategoryParentAssociation');
 			$m->addCondition('parent_category_id',$xsnb_category_id);
 						
 			$temp = [];
@@ -74,10 +74,10 @@ class  View_ShopCollectionDetailLister extends \CompleteLister{
 		}
 
 		if($category_code){
-			$cat_m = $this->add('xepan\commerce\Model_Category');
+			$cat_m = $this->add('xepan\custom\Model_Category');
 			$cat_m->tryLoadBy('slug_url',$category_code);
 
-			$m = $this->add('xepan\commerce\Model_CategoryParentAssociation');
+			$m = $this->add('xepan\custom\Model_CategoryParentAssociation');
 			$m->addCondition('parent_category_id',$cat_m->id);
 						
 			$temp = [];

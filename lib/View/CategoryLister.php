@@ -14,7 +14,7 @@ class View_CategoryLister extends \CompleteLister{
 	function init(){
 		parent::init();
 		
-		$model = $this->add('xepan\commerce\Model_Category');
+		$model = $this->add('xepan\custom\Model_Category');
 		$model->addCondition($model->dsql()->orExpr()->where('parent_category',0)->where('parent_category',null))
 				->addCondition('status','Active')
 				->addCondition('is_website_display',true);
@@ -43,7 +43,7 @@ class View_CategoryLister extends \CompleteLister{
 		}
 
 		if($this->options['include_sub_category']){
-			$sub_cat = $this->add('xepan\commerce\Model_Category',['name'=>'model_child_'.$this->model->id]);
+			$sub_cat = $this->add('xepan\custom\Model_Category',['name'=>'model_child_'.$this->model->id]);
 			$sub_cat->addCondition('parent_category',$this->model->id);
 			$sub_cat->addCondition('status',"Active");
 			$sub_cat->setOrder('display_sequence','desc');

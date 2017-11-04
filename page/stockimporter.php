@@ -16,7 +16,7 @@ class page_stockimporter extends \xepan\base\Page{
 		$item_tab = $tabs->addTab('Item');
 		$lead_tab = $tabs->addTab('Contacts / Leads');
 
-		$item_stock_m = $stock_tab->add('xepan\commerce\Model_ItemStock');
+		$item_stock_m = $stock_tab->add('xepan\custom\Model_ItemStock');
 
 		$crud = $stock_tab->add('xepan\base\CRUD');
 		$crud->setModel($item_stock_m,['item','size','current_stock']);
@@ -38,7 +38,7 @@ class page_stockimporter extends \xepan\base\Page{
 		$price_import_btn->setIcon('ui-icon-arrowthick-1-n');
 		$price_import_btn->js('click')->univ()->frameURL('Import CSV',$this->app->url('xepan_custom_priceimport'));				
 	
-		$item_tab->add('xepan\commerce\page_item');
+		$item_tab->add('xepan\custom\page_item');
 
 		$lead_grid = $lead_tab->add('xepan\hr\Grid');
 		$lead_m = $this->add('xepan\marketing\Model_Lead');

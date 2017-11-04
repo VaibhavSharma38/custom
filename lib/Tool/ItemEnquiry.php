@@ -8,8 +8,8 @@ class Tool_ItemEnquiry extends \xepan\cms\View_Tool{
 
 		$vp = $this->add('VirtualPage');
 		$vp->set(function($p){
-			$item_id = $this->app->stickyGET('item_id');
-			
+			$item_code = $this->app->stickyGET('item_code');
+
 			$form = $p->add('Form');
 			$form->setLayout(['view\tool\form\itemenquiry']);
 			$form->addField('name');
@@ -23,8 +23,8 @@ class Tool_ItemEnquiry extends \xepan\cms\View_Tool{
 			$form->addField('text','requirements');
 			$form->addSubmit('Submit Enquiry');
 
-			$item_m = $this->add('xepan\commerce\Model_Item');
-			$item_m->load($item_id);
+			$item_m = $this->add('xepan\custom\Model_Item');
+			$item_m->tryLoadBy('slug_url',$item_code);
 			
 			$custom_fields = $item_m->activeAssociateCustomField();
 		
@@ -61,8 +61,8 @@ class Tool_ItemEnquiry extends \xepan\cms\View_Tool{
 
 				$enquiry_m->save();
 				
-				$item_m = $this->add('xepan\commerce\Model_Item');
-				$item_m->load($_GET['item_id']);
+				$item_m = $this->add('xepan\custom\Model_Item');
+				$item_m->tryLoadBy('slug_url',$_GET['item_code']);
 
 				$this->sendEmail($form, $item_m['sku']);
 
@@ -73,7 +73,7 @@ class Tool_ItemEnquiry extends \xepan\cms\View_Tool{
 
 		$button = $this->add('Button')->set('Submit Enquiry')->setHTML('<span style ="font-size:16px;"><i class="glyphicon glyphicon-envelope"></i></span> <br>Submit Enquiry')->addClass('enquiry-button');
 		
-		$button->js('click',$this->js()->univ()->frameURL("Send Enquiry",$this->api->url($vp->getURL(),['item_id'=>$_GET['commerce_item_id']])))->_selector('.enquiry-button');
+		$button->js('click',$this->js()->univ()->frameURL("Send Enquiry",$this->api->url($vp->getURL(),['item_code'=>$_GET['item_code']])))->_selector('.enquiry-button');
 	}
 
 	function sendEmail($form, $item_name){

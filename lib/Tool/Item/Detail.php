@@ -26,18 +26,42 @@ class Tool_Item_Detail extends \xepan\cms\View_Tool{
 	function init(){
 		parent::init();
 
+		$country_m = $this->app->country;
+
+		if($_SERVER['SERVER_ADDR']){ 
+	        $ip = str_replace('.',"", $_SERVER['SERVER_ADDR']);
+	        $s = $this->app->db->dsql()
+	                        ->table('ip2location-lite-db11')
+	                        // ->where('ip_from','<=','16777216')
+	                        // ->where('ip_to','>=','16777471')
+	                        ->where('ip_from','<=',$ip)
+	                        ->where('ip_to','>=',$ip)
+	                        ->del('fields')->get();
+	        // throw new \Exception(var_dump($s), 1);
+	        // exit;
+	        
+	        $country_m->tryLoadBy('iso_code',$s['0']['country']);     		
+    	}
+
+  //   	if(!$country_m->loaded())
+		// 	$this->options['show_addtocart'] = false;
+
+		// if($country_m->loaded() AND $country_m['status'] =='InActive')
+		// 	$this->options['show_addtocart'] = false;
+
+
 		// added for price changing
 		$this->addClass('xshop-item');
 
 		$item_id = $this->api->stickyGET('commerce_item_id');
 		if(!$item_id){
-			$i = $this->add('xepan\commerce\Model_item');
+			$i = $this->add('xepan\custom\Model_Item');
 			$i->tryLoadBy('slug_url',$_GET['item_code']);
 			$item_id = $i->id;
 			
 		}
 
-		$this->item = $this->add('xepan\commerce\Model_Item')->tryLoad($item_id?:-1);
+		$this->item = $this->add('xepan\custom\Model_Item')->tryLoad($item_id?:-1);
 		if(!$this->item->loaded()){
 			$this->add('View')->set('No Record Found');
 			$this->template->tryDel("xepan_commerce_itemdetail_wrapper");
@@ -93,7 +117,7 @@ class Tool_Item_Detail extends \xepan\cms\View_Tool{
 						'amount_group_in_multistepform'=>$this->options['amount_group_in_multistepform']
 						];
 
-			$cart_btn = $this->add('xepan\commerce\Tool_Item_AddToCartButton',
+			$cart_btn = $this->add('xepan\custom\Tool_Item_AddToCartButton',
 				[
 					'name' => "addtocart_view_".$model->id,
 					'options'=>$options
@@ -102,78 +126,6 @@ class Tool_Item_Detail extends \xepan\cms\View_Tool{
 			$cart_btn->setModel($model);
 		}
 		
-		//add Item Uploadable		
-		// if($model['is_allowuploadable'] and $this->options['show_item_upload']){
-		// 	// $contact = $this->add('xepan/base/Model_Contact');
-  //  //    		if(!$contact->loadLoggedIn()){
-  //  //  			//Todo add login panle here
-		// 	// 	$this->add('View_Error',null,'item_upload')->set('add Login Panel Here');
-		// 	// 	return;
-  //  //    		}
-
-  //  //    		$member_image=$this->add('xepan/commerce/Model_Designer_Images');
-		// 	// $images_count = 1;
-		// 	// if($model['upload_file_label']){
-		// 	// 	$upload_array=explode(',', $model['upload_file_label']);
-		// 	// 	$images_count = count($upload_array);
-		// 	// }
-
-		// 	$v = $this->add('View',null,'item_upload');
-
-		// 	$this->api->stickyGET('show_cart');
-
-		// 	if($_GET['show_cart']){
-		// 		$v->add('Button')->setLabel('Back')->js('click',$v->js()->reload(array('show_cart'=>0)));
-
-		// 		$options = [
-		// 				'button_name'=>$this->options['addtocart_button_label'],
-		// 				'show_addtocart_button'=>$model['is_designable']?0:1,
-		// 				'show_price'=>$this->options['show_price_or_amount'],
-		// 				'form_layout'=>$this->options['multi_step_form_layout'],
-		// 				'show_original_price'=>$this->options['show_original_price']
-		// 				];
-
-		// 		$cart_btn = $v->add('xepan\commerce\Tool_Item_AddToCartButton',
-		// 			[
-		// 				'name' => "addtocart_view_".$model->id,
-		// 				'options'=>$options
-		// 			]);
-		// 		$cart_btn->setModel($model);
-
-		// 	}else{
-				
-		// 		$v->add('View')->setHTML($model['item_specific_upload_hint']);
-		// 		$up_form = $v->add('Form');
-		// 		$multi_upload_field = $up_form->addField('Upload','upload',"")
-		// 				->allowMultiple($images_count)
-		// 				->setFormatFilesTemplate('view/tool/item/detail/file_upload');
-		// 		$multi_upload_field->setAttr('accept','.jpeg,.png,.jpg');
-		// 		$multi_upload_field->setModel('filestore/Image');
-
-		// 		$up_form->addSubmit('Next');
-				
-		// 		if($up_form->isSubmitted()){
-		// 			//check for the image count
-		// 			$upload_images_array = explode(",",$up_form['upload']);
-
-		// 			if($images_count != count($upload_images_array))
-		// 				$up_form->error('upload','upload all images');
-
-		// 			$image_cat_model = $this->add('xepan\commerce\Model_Designer_Image_Category')->loadCategory($model['name']);
-
-		// 			foreach ($upload_images_array as $file_id) {
-		// 			    $image_model = $this->add('xepan/commerce/Model_Designer_Images');
-		// 				$image_model['file_id'] = $file_id;
-		// 				$image_model['designer_category_id'] = $image_cat_model->id;
-		// 				$image_model->saveAndUnload();
-		// 			}
-
-		// 			$up_form->js(null,$v->js()->reload(array('show_cart'=>1,'file_upload_ids'=>$up_form['upload'])))->execute();
-		// 		}
-		// 	}
-
-		// }
-
 		parent::setModel($model);
 	}
 

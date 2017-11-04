@@ -29,7 +29,7 @@ class page_importexecute extends \xepan\base\Page{
 				$importer = new \xepan\base\CSVImporter($_FILES['csv_stock_file']['tmp_name'],true,',');
 				$data = $importer->get();
 
-				$item_stock_m = $this->add('xepan\commerce\Model_ItemStock');
+				$item_stock_m = $this->add('xepan\custom\Model_ItemStock');
 				$item_stock_m->importStock($data);
 			}
 		}

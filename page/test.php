@@ -6,7 +6,7 @@ class page_test extends \xepan\base\Page{
 	function init(){
 		parent::init();
 
-		// $item_m = $this->add('xepan\commerce\Model_Item');
+		// $item_m = $this->add('xepan\custom\Model_Item');
 		// $item_m->join('item_image.item_id','id');
 		// $item_m->_dsql()->group('sku');
 		// $item_m->addExpression('image_count','count(*)');
@@ -14,7 +14,7 @@ class page_test extends \xepan\base\Page{
 		// $grid = $this->add('Grid');
 		// $grid->setModel($item_m,['sku','image_count']);
 
-		// $item_m = $this->add('xepan\commerce\Model_Item');
+		// $item_m = $this->add('xepan\custom\Model_Item');
 		
 		// foreach ($item_m as $item) {
 		// 	$text = strtolower(htmlentities($item['sku'])); 

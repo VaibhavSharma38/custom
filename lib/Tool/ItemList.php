@@ -95,7 +95,7 @@ class Tool_ItemList extends \xepan\cms\View_Tool{
 
 		if($category_code = $_GET['category_code']){
 			$category_code = explode('/', $category_code);
-			$cat_m = $this->add('xepan\commerce\Model_Category');
+			$cat_m = $this->add('xepan\custom\Model_Category');
 			$cat_m->tryLoadBy('slug_url',$category_code[1]);			
 			$selected_category[] = $cat_m->id;
 		}
@@ -119,7 +119,7 @@ class Tool_ItemList extends \xepan\cms\View_Tool{
 
 		if($this->options['show_related_items']){
 			$current_item_id = $this->app->stickyGET('commerce_item_id');
-			$current_item_m = $this->add('xepan\commerce\Model_Item');
+			$current_item_m = $this->add('xepan\custom\Model_Item');
 			$current_item_m->addCondition('id',$current_item_id);
 
 			$item_j = $current_item_m->Join('category_item_association.item_id');
@@ -144,13 +144,13 @@ class Tool_ItemList extends \xepan\cms\View_Tool{
 		if(!$this->options['show_out_of_stock']){
 			$parent_category_id = $_GET['parent_category_id'];
 			if(!$parent_category_id){
-				$c = $this->add('xepan\commerce\Model_Category');
+				$c = $this->add('xepan\custom\Model_Category');
 				$c->loadBy('slug_url',$_GET['parent_category_code']);
 				$parent_category_id = $c->id;
 			}	
 
 			$item->addExpression('net_stock')->set(function($m,$q) use($parent_category_id){
-				$item_stock_m = $this->add('xepan\commerce\Model_ItemStock');
+				$item_stock_m = $this->add('xepan\custom\Model_ItemStock');
 				$item_stock_m->addCondition('item_id',$m->getElement('id'));
 				$item_stock_m->addCondition('category',$parent_category_id);
 
@@ -281,7 +281,7 @@ class Tool_ItemList extends \xepan\cms\View_Tool{
 			if($this->options['show_category_name']){
 				$str = "";
 				foreach ($selected_category as $cat_id) {
-					$ct_model = $this->add('xepan\commerce\Model_Category')->tryLoad($cat_id);
+					$ct_model = $this->add('xepan\custom\Model_Category')->tryLoad($cat_id);
 					if($ct_model->loaded()){
 						$str .= $ct_model['name'] .", ";
 					}
@@ -399,14 +399,14 @@ class Tool_ItemList extends \xepan\cms\View_Tool{
 						'amount_group_in_multistepform'=>$this->options['amount_group_in_multistepform']
 						];
 
-			$cart_btn = $l->add('xepan\commerce\Tool_Item_AddToCartButton',
+			$cart_btn = $l->add('xepan\custom\Tool_Item_AddToCartButton',
 					[
 						'name' => "addtocart_view_".$l->model->id,
 						'options'=>$options
 					],'Addtocart'
 				);
 		
-			$item = $this->add('xepan\commerce\Model_Item')->load($l->model->id);
+			$item = $this->add('xepan\custom\Model_Item')->load($l->model->id);
 			$cart_btn->setModel($item);
 			$l->current_row_html['Addtocart'] = $cart_btn->getHtml();
 		}else

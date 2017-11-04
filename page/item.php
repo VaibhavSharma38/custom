@@ -7,7 +7,7 @@
 	function init(){
 		parent::init();
 
-		$item=$this->add('xepan\commerce\Model_Item');
+		$item=$this->add('xepan\custom\Model_Item');
 		$item->addExpression('weakly_sales')->set(function($m,$q){
 			$qsp_details = $m->add('xepan\commerce\Model_QSP_Detail',['table_alias'=>'weeklysales']);
 			$qsp_details->addExpression('document_type')->set($qsp_details->refSQL('qsp_master_id')->fieldQuery('type'));
@@ -40,34 +40,34 @@
 			$item->addCondition($condition,true);			
 		}
 		
-		$model_item=$this->add('xepan\commerce\Model_Item');
+		$model_item=$this->add('xepan\custom\Model_Item');
 		$saleable_count = $model_item->addCondition('is_saleable',true)->count();
 		
-		$model_item1=$this->add('xepan\commerce\Model_Item');
+		$model_item1=$this->add('xepan\custom\Model_Item');
 		$purchasable_count = $model_item1->addCondition('is_purchasable',true)->count();
 		
-		$model_item2=$this->add('xepan\commerce\Model_Item');
+		$model_item2=$this->add('xepan\custom\Model_Item');
 		$productionable_count = $model_item2->addCondition('is_productionable',true)->count();
 		
-		$model_item3=$this->add('xepan\commerce\Model_Item');
+		$model_item3=$this->add('xepan\custom\Model_Item');
 		$allowuploadable_count = $model_item3->addCondition('is_purchasable',true)->count();
 		
-		$model_item4=$this->add('xepan\commerce\Model_Item');
+		$model_item4=$this->add('xepan\custom\Model_Item');
 		$template_count = $model_item4->addCondition('is_template',true)->count();
 		
-		$model_item5=$this->add('xepan\commerce\Model_Item');
+		$model_item5=$this->add('xepan\custom\Model_Item');
 		$designable_count = $model_item5->addCondition('is_designable',true)->count();
 		
-		$model_item6=$this->add('xepan\commerce\Model_Item');
+		$model_item6=$this->add('xepan\custom\Model_Item');
 		$dispatchable_count = $model_item6->addCondition('is_dispatchable',true)->count();
 		
-		$model_item7=$this->add('xepan\commerce\Model_Item');
+		$model_item7=$this->add('xepan\custom\Model_Item');
 		$maintaininventory_count = $model_item7->addCondition('maintain_inventory',true)->count();
 		
-		$model_item8=$this->add('xepan\commerce\Model_Item');
+		$model_item8=$this->add('xepan\custom\Model_Item');
 		$allownewgativestock_count = $model_item8->addCondition('allow_negative_stock',true)->count();
 
-		$party_publish=$this->add('xepan\commerce\Model_Item');
+		$party_publish=$this->add('xepan\custom\Model_Item');
 		$party_publish_count = $party_publish->addCondition('is_party_publish',1)->addCondition('status','UnPublished')->count();
 
 		$this->app->side_menu->addItem(['Party Publish','icon'=>'fa fa-shopping-cart text-success','badge'=>[$party_publish_count,'swatch'=>' label label-primary label-circle pull-right']],$this->app->url('xepan_commerce_item',['condition'=>'is_party_publish']),['status','condition'])->setAttr(['title'=>'Party Publish Item']);

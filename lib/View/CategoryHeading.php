@@ -7,7 +7,7 @@ class View_CategoryHeading extends \View{
 	function init(){
 		parent::init();
 		
-		$model = $this->add('xepan\commerce\Model_Category');
+		$model = $this->add('xepan\custom\Model_Category');
 		
 		if($xsnb_category_id = $_GET['xsnb_category_id']){			
 			$model->load($xsnb_category_id);

@@ -23,7 +23,7 @@ class page_itemimport extends \xepan\base\Page{
 	        
 			fputcsv($file, array('sku','description','hide_in_product','hide_in_shop','category','collection','style','construction','design','color','color family','standard size','shape','material','pile height','features','hsn_code'));
 	        
-	        $item_m = $this->add('xepan\commerce\Model_Item');
+	        $item_m = $this->add('xepan\custom\Model_Item');
 	        $item_m->setLimit(1);
 
 	        $data = [];
@@ -238,7 +238,7 @@ class page_itemimport extends \xepan\base\Page{
 	        	$category_name_array = [];
 	        	$collection_name_array = [];
 	        	foreach ($assoc_m as $assoc) {
-	        		$cat_m = $this->add('xepan\commerce\Model_Category');
+	        		$cat_m = $this->add('xepan\custom\Model_Category');
 	        		$cat_m->load($assoc['category_id']);
 	        		
 	        		if($cat_m['is_collection'])
@@ -249,7 +249,7 @@ class page_itemimport extends \xepan\base\Page{
 
 	        	$category = implode(',',$category_name_array);
 	        	$collection = implode(',',$collection_name_array);
-        		$data [] = [$item['sku'],$item['description'],$item['hide_in_product'],$item['hide_in_shop'],$category,$collection,$style,$construction,$design,$color,$color_family,$size,$shape,$material,$pile_height,$features,$item['hsn_no']];		        		
+        		$data [] = [$item['sku'],$item['description'],$item['hide_in_product'],$item['hide_in_shop'],$category,$collection,$style,$construction,$design,$color,$color_family,$size,$shape,$material,$pile_height,$features,$item['hsn_sac']];		        		
 	        }
 	        
 			foreach ($data as $row)

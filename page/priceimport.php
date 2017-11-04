@@ -26,7 +26,7 @@ class page_priceimport extends \xepan\base\Page{
 	        
 			fputcsv($file, array('sku','size','price'));
 	        
-	        $item_m = $this->add('xepan\commerce\Model_Item');
+	        $item_m = $this->add('xepan\custom\Model_Item');
 
 	        $data = [];
 	        foreach ($item_m as $item) {

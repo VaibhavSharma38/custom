@@ -10,7 +10,7 @@ class page_category extends \xepan\base\Page {
 
 		$vp = $this->add('VirtualPage');
 
-		$category_model = $this->add('xepan\commerce\Model_Category');
+		$category_model = $this->add('xepan\custom\Model_Category');
 		$category_model->add('xepan\commerce\Controller_SideBarStatusFilter');
 		
 		$crud = $this->add('xepan\hr\CRUD',
@@ -31,7 +31,7 @@ class page_category extends \xepan\base\Page {
 			$parent_field->setAttr(['multiple'=>'multiple']);
 
 		   if($crud->model->id){
-				$cat = $this->add('xepan\commerce\Model_Category')->load($crud->model->id);
+				$cat = $this->add('xepan\custom\Model_Category')->load($crud->model->id);
 				$temp = [];
 				$temp = explode(',', $cat['parent_category']);
 				
@@ -47,7 +47,7 @@ class page_category extends \xepan\base\Page {
 		$crud->grid->addHook('formatRow',function($g){			
 			$arr = explode(',', $g->model['parent_category']);
 			
-			$cat_m = $this->add('xepan\commerce\Model_Category');
+			$cat_m = $this->add('xepan\custom\Model_Category');
 			$cat_m->addCondition('id',$arr);
 
 			$new_arr = []; 		

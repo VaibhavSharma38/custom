@@ -41,10 +41,10 @@ class Tool_Filter extends \xepan\cms\View_Tool{
 		$avil_size_array = [];
 
 		$category_code = explode('/', $_GET['category_code']);
-		$category_m = $this->add('xepan\commerce\Model_Category');
+		$category_m = $this->add('xepan\custom\Model_Category');
 		$category_m->tryLoadBy('slug_url',$category_code[1]);
 
-		$parent_category_m = $this->add('xepan\commerce\Model_Category');
+		$parent_category_m = $this->add('xepan\custom\Model_Category');
 		$parent_category_m->tryLoadBy('slug_url',$_GET['parent_category_code']);
 
 		if($xsnb_category_id = $category_m->id){			
@@ -57,7 +57,7 @@ class Tool_Filter extends \xepan\cms\View_Tool{
 			}
 
 			foreach ($item_id as $item){				
-				$item_m = $this->add('xepan\commerce\Model_Item');	
+				$item_m = $this->add('xepan\custom\Model_Item');	
 				$item_m->tryLoad($item);
 
 				if(!$item_m->loaded())
@@ -72,7 +72,7 @@ class Tool_Filter extends \xepan\cms\View_Tool{
 					if($item_m['hide_in_shop'])
 						continue;
 
-					$item_stock_m = $this->add('xepan\commerce\Model_ItemStock');
+					$item_stock_m = $this->add('xepan\custom\Model_ItemStock');
 					$item_stock_m->addCondition('item_id',$item_m->id);
 
 					
@@ -98,7 +98,7 @@ class Tool_Filter extends \xepan\cms\View_Tool{
 			    $model_cf_value->tryLoadAny();
 
 				if($this->options['filter_type'] == 'shop'){
-					$stock_m = $this->add('xepan\commerce\Model_ItemStock');
+					$stock_m = $this->add('xepan\custom\Model_ItemStock');
 					$stock_m->addCondition('item_id',$item_m->id);
 					$stock_m->addCondition('category',$category_m->id);
 

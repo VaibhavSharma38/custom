@@ -22,7 +22,7 @@
 	function page_index(){
 		$action = $this->api->stickyGET('action')?:'view';
 	
-		$item = $this->add('xepan\commerce\Model_Item')->tryLoadBy('id',$this->api->stickyGET('document_id'));
+		$item = $this->add('xepan\custom\Model_Item')->tryLoadBy('id',$this->api->stickyGET('document_id'));
 
 		if($this->app->stickyGET('new_template') ){
 			$item->addCondition('is_template',true);
@@ -45,7 +45,7 @@
 				$basic_item_side_info->effective_template->setHTML('stock_available','<i style="color:red;"> Out Of Stock</i>');
 		}
 
-		$basic_item = $this->add('xepan\base\View_Document',['action'=>$action,'id_field_on_reload'=>'document_id','page_reload'=>true],'basic_info',['page/item/detail','basic_info']);
+		$basic_item = $this->add('xepan\base\View_Document',['action'=>$action,'id_field_on_reload'=>'document_id','page_reload'=>true],'basic_info',['page/item/item-detail-layout','basic_info']);
 		$basic_item->setModel($item,['name','sku','display_sequence','status','expiry_date',
 								'is_saleable','is_allowuploadable','is_purchasable','is_productionable',
 								'website_display','maintain_inventory','allow_negative_stock','is_dispatchable',
@@ -55,7 +55,7 @@
 								'enquiry_send_to_admin','item_enquiry_auto_reply',
 								'is_comment_allow','comment_api',
 								'add_custom_button','custom_button_label','custom_button_url',
-								'description','terms_and_conditions','is_designable','upload_file_label','item_specific_upload_hint','upload_file_group','is_renewable','remind_to','renewable_value','renewable_unit','to_customer_id','is_teller_made_item','minimum_stock_limit','is_serializable','hide_in_product','hide_in_shop','hsn_no','slug_url'],
+								'description','terms_and_conditions','is_designable','upload_file_label','item_specific_upload_hint','upload_file_group','is_renewable','remind_to','renewable_value','renewable_unit','to_customer_id','is_teller_made_item','minimum_stock_limit','is_serializable','hide_in_product','hide_in_shop','hsn_sac','slug_url'],
 
 								['name','sku','display_sequence','expiry_date','status',
 								'is_saleable','is_allowuploadable','is_purchasable','is_productionable',
@@ -66,7 +66,7 @@
 								'enquiry_send_to_admin','item_enquiry_auto_reply',
 								'is_comment_allow','comment_api',
 								'add_custom_button','custom_button_label','custom_button_url','duplicate_from_item_id','designer_id',
-								'description','terms_and_conditions','is_designable','upload_file_label','item_specific_upload_hint','upload_file_group','is_renewable','remind_to','renewable_value','renewable_unit','to_customer_id','is_teller_made_item','minimum_stock_limit','is_serializable','hide_in_product','hide_in_shop','hsn_no','slug_url']);
+								'description','terms_and_conditions','is_designable','upload_file_label','item_specific_upload_hint','upload_file_group','is_renewable','remind_to','renewable_value','renewable_unit','to_customer_id','is_teller_made_item','minimum_stock_limit','is_serializable','hide_in_product','hide_in_shop','hsn_sac','slug_url']);
 
 		if(!$item['website_display']) $this->js(true)->_selector('#website_display')->hide();
 		$basic_item->form->getElement('website_display')->js('change',$this->js()->_selector('#website_display')->toggle());
@@ -336,7 +336,7 @@
 
 		*/	
 			$update_form = $this->add('Form',null,'update_form')->addClass('xepan-admin-input-full-width');
-			$update_form->add('View')->addClass('alert alert-info')->set("Total Item to Update: ".$this->add('xepan\commerce\Model_Item')->addCondition('duplicate_from_item_id',$item->id)->count()->getOne());
+			$update_form->add('View')->addClass('alert alert-info')->set("Total Item to Update: ".$this->add('xepan\custom\Model_Item')->addCondition('duplicate_from_item_id',$item->id)->count()->getOne());
 
 			$update_form->addField('dropdown','select_fields','Replicate Associated Information')
 						->addClass('multiselect-full-width')
@@ -387,7 +387,7 @@
 										['view/item/associate/category']
 									);
 
-			$model_active_category = $this->add('xepan\commerce\Model_Category')->addCondition('status','Active');
+			$model_active_category = $this->add('xepan\custom\Model_Category')->addCondition('status','Active');
 
 			$form = $this->add('Form',null,'cat_asso_form');
 			$ass_cat_field = $form->addField('hidden','ass_cat')->set(json_encode($item->getAssociatedCategories()));
