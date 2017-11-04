@@ -27,9 +27,7 @@ class Model_CurrentOpening extends \xepan\base\Model_Table{
 		$this->addField('post_name');		
 		$this->addField('experience_required');		
 		$this->addField('location');		
-		$this->addField('description')->type('text')->display(['form'=>'xepan\base\RichText']);		
-		
-		$this->addHook('afterSave',[$this,'populateValue']);
+		$this->addField('description')->type('text')->display(['form'=>'xepan\base\RichText']);				
 	}
 
 	function deactivate(){

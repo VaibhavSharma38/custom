@@ -12,6 +12,8 @@ class Tool_RecentlyViewedItems extends \xepan\cms\View_Tool{
 	function init(){
 		parent::init();
 
+		$this->app->stickyForget('item_code');
+
 		$item_id = $_GET['item_code'];		
 		$item_cookie = $_COOKIE['items'];		
 		$item_cookie = stripslashes($item_cookie);
