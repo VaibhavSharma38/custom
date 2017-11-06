@@ -26,12 +26,18 @@ class Tool_PopupCard extends \xepan\cms\View_Tool{
 
 		if($this->options['show_form']){			
 			$form = $this->add('Form',null,'form');
-			$form->setLayout('view/tool/form/popupcard');
-			$form->addField('name')->addClass('form-control');
-			$form->addField('email')->addClass('form-control');
-			$form->addSubmit('Submit');
+			// $form->setLayout('view/tool/form/popupcard');
+			$form->addField('line','name','')->addClass('form-control popup-input')->setAttr(['placeholder'=>'Name']);
+			$form->addField('line','email','')->addClass('form-control popup-input')->setAttr(['placeholder'=>'Email']);
+			$new_field = $form->addField('line','captcha','')->addClass('popup-input')->setAttr(['placeholder'=>'Captcha']);
+			$new_field->add('xepan\captcha\Controller_Captcha');
+			$form->addSubmit('Submit')->addClass('btn btn-primary btn-popup-submit');
 
 			if($form->isSubmitted()){
+				if($form->hasElement('captcha') && !$form->getElement('captcha')->captcha->isSame($form['captcha']))
+					return $this->js()->univ()->alert('Wrong Captcha, click on captcha and reload it')->execute();
+					// $form->displayError('captcha','wrong Captcha');	
+
 				if($form['name'] == '')
 					return $this->js()->univ()->alert('Fill your name')->execute();
 
@@ -121,7 +127,7 @@ class Tool_PopupCard extends \xepan\cms\View_Tool{
 		return ['view\tool\card'];
 	}
 
-	function sendThankYouMail($email_id){		
+	function sendThankYouMail($email_id){								
 		if(!$email_id)
 			return;
 
@@ -155,10 +161,10 @@ class Tool_PopupCard extends \xepan\cms\View_Tool{
 		$email_subject = $frontend_config_m['subscription_subject'];
 		$email_body = $frontend_config_m['subscription_body'];
 
-		$subject_temp=$this->add('GiTemplate');
+		$subject_temp = $this->add('GiTemplate');
 		$subject_temp->loadTemplateFromString($email_subject);
 		
-		$subject_v=$this->add('View',null,null,$subject_temp);
+		$subject_v = $this->add('View',null,null,$subject_temp);
 
 		$temp=$this->add('GiTemplate');
 		$temp->loadTemplateFromString($email_body);

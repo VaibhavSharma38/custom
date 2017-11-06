@@ -1,7 +1,7 @@
 {$Content}
 <div id="{$_name}_card_model" tabindex="-1" role="dialog" aria-labelledby="{$_name}_model_label" class="modal fade hidden-xs hidden-sm">
   <div role="document" class="modal-dialog">
-    <div style="background-image: url({$image}); min-height:650px !important; max-height:650px; overflow:hidden;" class="modal-content">
+    <div style="background-image: url({$image}); background-repeat: no-repeat; min-height:650px !important; max-height:650px; overflow:hidden;" class="modal-content">
       <div class="modal-header">
         <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true" style="font-size: 35px; font-weight : bold; margin-right:10px; color: #000 !important;">×	</span></button>
       </div>
@@ -28,7 +28,23 @@
     
   </script>
 </div>
-<style>
+<style> 
+
+  .atk-cells-gutter-large{
+    margin-top : -25px;
+  }
+  .atk-jackscrew{
+    margin-top: -50px;
+  }
+  .atk-cells-gutter-large {
+    display: inline-flex;
+  }
+
+  .popup-input{
+    width: 90%;
+    margin-top:-40px;
+  }
+
   .modal-dialog{
    width: 800px;
   }
