@@ -376,7 +376,7 @@ class Tool_Item_AddToCartButton extends \View{
 						$form->js()->_selector('.xepan-commerce-item-image')
 								->reload(
 										[
-											'commerce_item_id'=>$commerce_item->id],
+											'item_code'=>$commerce_item['slug_url']],
 											null,
 											[
 												$this->app->url(null,['custom_field'=>json_encode($department_custom_field)]),
