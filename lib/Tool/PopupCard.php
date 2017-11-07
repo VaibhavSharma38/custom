@@ -5,7 +5,7 @@ namespace xepan\custom;
 class Tool_PopupCard extends \xepan\cms\View_Tool{
 	public $options = ['show_popup'=>true,
 					   'show_image'=>true,
-					   'show_form'=>true
+					   'show_form'=>false
 					];
 
 	function init(){
