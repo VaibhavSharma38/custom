@@ -24,5 +24,6 @@ class page_test extends \xepan\base\Page{
 		// 	$item['slug_url'] = $text;
 		// 	$item->save();
 		// }
+		// comment
 	}
 }
