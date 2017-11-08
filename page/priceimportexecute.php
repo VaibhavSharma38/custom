@@ -28,7 +28,7 @@ class page_priceimportexecute extends \xepan\base\Page{
 				$importer = new \xepan\base\CSVImporter($_FILES['csv_price_file']['tmp_name'],true,',');
 				$data = $importer->get();
 
-				$item_stock_m = $this->add('xepan\commerce\Model_Item_Quantity_Set');
+				$item_stock_m = $this->add('xepan\custom\Model_ItemPrice');
 				$item_stock_m->importPrice($data);
 			}
 		}
