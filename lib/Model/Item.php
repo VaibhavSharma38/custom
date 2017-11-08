@@ -2472,7 +2472,7 @@ class Model_Item extends \xepan\hr\Model_Document{
 				// Insert Category	
 				foreach ($category_array as $value) {
 					// Finding category 
-					$cat_m = $this->add('xepan\commerce\Model_category');
+					$cat_m = $this->add('xepan\custom\Model_category');
 					$cat_m->tryLoadBy('name',$value);
 					
 					if(!$cat_m->loaded())
