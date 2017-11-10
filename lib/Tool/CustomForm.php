@@ -80,6 +80,10 @@ class Tool_CustomForm extends \xepan\cms\View_Tool{
 
 			// creating lead and associating category and email id
 			if($this->customform_model['is_create_lead']){
+				
+				if($this->form['honeydip'])
+					return;
+
 				$field_model = $this->add('xepan\cms\Model_Custom_FormField')
 							->addCondition('custom_form_id',$this->customform_model->id)
 							->addCondition('save_into_field_of_lead','<>',null);
