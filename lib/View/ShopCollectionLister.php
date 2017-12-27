@@ -17,7 +17,7 @@ class View_ShopCollectionLister extends \CompleteLister{
 		parent::init();
 		
 		$model = $this->add('xepan\custom\Model_Category');
-		$model->addCondition('name',['Shop By Collection','Exclusive','Clearance']);
+		$model->addCondition('name',['Shop By Collection','Exclusive','One Of A Kind']);
 		$model->setOrder('display_sequence','asc');
 		$this->setModel($model);
 
@@ -26,8 +26,8 @@ class View_ShopCollectionLister extends \CompleteLister{
 	
 	function formatRow(){		
 		$this->app->stickyForget('category_code');
-		if($this->model['name'] == 'Clearance'){
-			$url = $this->app->url('shop/clearance');
+		if($this->model['name'] == 'One Of A Kind'){
+			$url = $this->app->url('shop/one-of-a-kind');
 			$this->current_row_html['url'] = $url;
 		}
 		elseif ($this->model['name'] == 'Shop By Collection') {
