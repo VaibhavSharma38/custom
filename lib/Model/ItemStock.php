@@ -94,11 +94,11 @@ class Model_ItemStock extends \xepan\base\Model_Table{
 						if($value == 'B')	
 							$category_name = 'Exclusive';
 						if($value == 'C')
-							$category_name = 'One Of A Kind';
+							$category_name = 'Clearance';
 						
 						// Removing old category
 						$category_model = $this->add('xepan\custom\Model_Category');
-						$category_model->addCondition('name',['Shop By Collection','Exclusive','One Of A Kind']);
+						$category_model->addCondition('name',['Shop By Collection','Exclusive','Clearance']);
 
 						$category_array = [];
 						foreach ($category_model as $cat){
